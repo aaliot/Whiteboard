@@ -94,3 +94,9 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Real-time whiteboard backend
+
+- WebSocket server lives in `server/index.js` and persists events in Redis (`redis://redis:6379` by default).
+- Configure the frontend socket endpoint with `NEXT_PUBLIC_SOCKET_URL` (defaults to current host or `http://localhost:8080`).
+- Local stack with Redis + socket + web: `docker-compose up --build` (exposes web on 3000, socket on 8080, Redis on 6379).

@@ -1,0 +1,25 @@
+services:
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+  socket:
+    build: ./server
+    environment:
+      REDIS_URL: redis://redis:6379
+      WS_PORT: 8080
+      CORS_ORIGIN: http://localhost:3000
+    depends_on:
+      - redis
+    ports:
+      - "8080:8080"
+
+  web:
+    build: .
+    environment:
+      NEXT_PUBLIC_SOCKET_URL: http://localhost:8080
+    depends_on:
+      - socket
+    ports:
+      - "3000:3000"

@@ -17,7 +17,19 @@ export const useSocket = (canvas: Canvas | null) => {
 		const init = async () => {
 			if (!canvas) return;
 
-			const socket = await io('http://localhost:8080');
+			const inferredUrl =
+				typeof window !== 'undefined'
+					? `${window.location.protocol}//${window.location.hostname}${
+							window.location.port ? `:${window.location.port}` : ''
+					  }`
+					: null;
+			const socketUrl =
+				process.env.NEXT_PUBLIC_SOCKET_URL ||
+				inferredUrl ||
+				'http://localhost:8080';
+
+			const socket = await io(socketUrl);
+
 			socketRef.current = socket;
 
 			socket.on('connect', () => {
