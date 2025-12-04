@@ -17,11 +17,10 @@ export const useSocket = (canvas: Canvas | null) => {
 		const init = async () => {
 			if (!canvas) return;
 
+			// Infer WebSocket URL: use port 8080 for the socket server
 			const inferredUrl =
 				typeof window !== 'undefined'
-					? `${window.location.protocol}//${window.location.hostname}${
-							window.location.port ? `:${window.location.port}` : ''
-					  }`
+					? `${window.location.protocol}//${window.location.hostname}:8080`
 					: null;
 			const socketUrl =
 				process.env.NEXT_PUBLIC_SOCKET_URL ||
