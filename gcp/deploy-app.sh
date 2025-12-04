@@ -23,8 +23,8 @@ echo "============================================"
 echo "Redis IP: $REDIS_IP"
 echo ""
 
-# Create app directory
-APP_DIR="/home/ubuntu/whiteboard-app"
+# Create app directory in current user's home
+APP_DIR="$HOME/whiteboard-app"
 mkdir -p $APP_DIR
 cd $APP_DIR
 
